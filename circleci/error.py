@@ -27,7 +27,7 @@ class BadVerbError(CircleCIException):
 
     :param argument: The argument that was passed into the function.
     """
-    message = "verb must be one of 'GET', 'POST', or 'DELETE'"
+    message = "verb must be one of 'GET', 'POST', 'PUT' or 'DELETE'"
 
     def __init__(self, argument):
         super().__init__(argument)
