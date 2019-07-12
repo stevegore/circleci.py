@@ -199,6 +199,10 @@ class TestCircleCIApi(unittest.TestCase):
         with self.assertRaises(InvalidFilterError):
             self.c.get_latest_artifact('levlaz', 'circleci-sandbox', 'master', 'invalid')
 
+    def test_get_project_settings(self):
+        self.loadMock('mock_get_project_settings')
+        pass      
+
     # def test_helper(self):
     #     resp = self.c.get_latest_artifact('circleci', 'circleci-docs')
     #     print(resp)
