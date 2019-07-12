@@ -662,38 +662,6 @@ class Api():
 
         return resp
 
-    def update_project_setting(self, username, project, setting_name, setting_value, vcs_type='github'):
-        """Update an advanced project setting.
-
-        :param username: Org or user name.
-        :param project: Case sensitive repo name.
-        :param vcs_type: Defaults to github. On circleci.com you can \
-            also pass in ``bitbucket``.
-        :param setting_name: Setting to update. Options are: \
-            set-github-status, build-fork-prs, forks-receive-secret-env-vars, \
-            build-prs-only, autocancel-builds, builds-service
-        :param setting_value: Whether the setting is enabled or not
-
-        Endpoint:
-            GET ``/project/:vcs-type/:username/:project/settings``
-        """
-
-        params = {
-            "feature_flags": {
-                setting_name:setting_value
-            }
-        }
-
-        endpoint = 'project/{0}/{1}/{2}/settings'.format(
-            vcs_type,
-            username,
-            project
-        )
-
-        resp = self._request('PUT', endpoint, data=params)
-
-        return resp
-
     def update_project_settings(self, username, project, settings, vcs_type='github'):
         """Update advanced project settings.
 
@@ -701,18 +669,12 @@ class Api():
         :param project: Case sensitive repo name.
         :param vcs_type: Defaults to github. On circleci.com you can \
             also pass in ``bitbucket``.
-        :param settings: Dictionary of setting updates. Key options are: \
-            set-github-status, build-fork-prs, forks-receive-secret-env-vars, \
-            build-prs-only, autocancel-builds, builds-service. \
-            Values must be boolean.
+        :param settings: Dictionary of settings to update. \
+            Refer to mock_get_project_settings for example settings
 
         Endpoint:
             GET ``/project/:vcs-type/:username/:project/settings``
         """
-
-        params = {
-            "feature_flags": settings
-        }
 
         endpoint = 'project/{0}/{1}/{2}/settings'.format(
             vcs_type,
@@ -720,7 +682,7 @@ class Api():
             project
         )
 
-        resp = self._request('PUT', endpoint, data=params)
+        resp = self._request('PUT', endpoint, data=settings)
 
         return resp
 
